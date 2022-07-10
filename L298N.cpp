@@ -31,17 +31,17 @@ void L298N::setMotorEsquerda(int e1, int e2, int eV) {
     pino_e1 = e1;
     pino_e2 = e2;
     pino_eV = eV;
-       
+    velocidade_e = 255;
+    
     pinMode(pino_e1, OUTPUT);
     pinMode(pino_e2, OUTPUT);
     pinMode(pino_eV, OUTPUT);
 
     digitalWrite(pino_e1, LOW);
     digitalWrite(pino_e2, LOW);
-    digitalWrite(pino_eV, LOW);
+    analogWrite(pino_eV, velocidade_e);
     
     configurado_e = true;
-    velocidade_e = 255;
 }
 
 //=======================================================================================================================
@@ -52,6 +52,7 @@ void L298N::setMotorDireita(int d3, int d4, int dV) {
     pino_d3 = d3;
     pino_d4 = d4;
     pino_dV = dV;
+    velocidade_d = 255;
     
     pinMode(pino_d3, OUTPUT);
     pinMode(pino_d4, OUTPUT);
@@ -59,10 +60,9 @@ void L298N::setMotorDireita(int d3, int d4, int dV) {
 
     digitalWrite(pino_d3, LOW);
     digitalWrite(pino_d4, LOW);
-    digitalWrite(pino_dV, LOW);
+    analogWrite(pino_dV, velocidade_d);
     
     configurado_d = true;
-    velocidade_d = 255;
 }
 
 //=======================================================================================================================
