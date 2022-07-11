@@ -18,27 +18,40 @@ void mover_robo() {
     }
 }
 
-//=======================================================================================================================
-//MOVIMENTA O SERVO DE FORMA MAIS SUAVE
-//=======================================================================================================================
-
-void servoWrite(Servo servo, int angulo) {
-    int anguloAtual;
-     
-    anguloAtual = servo.read();
-
-    if(anguloAtual < angulo) {
-        for(int i = anguloAtual; i <= angulo ; i++) {
-            servo.write(i);
-            delay(10);
-        }
+void mover_braco() {
+    switch(servo_para_mover) {
+        case 1: servo_write(servo1, servo1_estado); break;      //Comando para o servo 1
+        case 2: servo_write(servo2, servo2_estado); break;      //Comando para o servo 2
+        case 3: servo_write(servo3, servo3_estado); break;      //Comando para o servo 3
+        case 4: servo_write(servo4, servo4_estado); break;      //Comando para o servo 4
     }
+}
 
-    if(anguloAtual > angulo) {
-        for(int i = anguloAtual; i >= angulo ; i--) {
-            servo.write(i);
-            delay(10);
+//=======================================================================================================================
+//MOVIMENTA O SERVO
+//=======================================================================================================================
+
+void servo_write(Servo servo, int estado) {
+    static unsigned long tempo = 0;
+    int angulo,
+        passo = 1;
+   
+    if(millis() - tempo >= 25) {
+        switch(estado) {
+            case 1:                                               //Decrementa o ângulo do servo
+                angulo = servo.read() - passo;
+                angulo = (angulo <= 0) ? (0) : (angulo);
+                servo.write(angulo);
+            break;
+
+            case 2:                                               //Incrementa o ângulo do servo
+                angulo = servo.read() + passo;
+                angulo = (angulo >= 180) ? (180) : (angulo);
+                servo.write(angulo);
+            break;    
         }
+
+        tempo = millis();
     }
 }
 
