@@ -31,5 +31,6 @@ int direcao = 0,                      //Variável que armazena a direção que o
 void mover_robo();                              //Move o robô para a direção desejada
 void mover_braco();                             //Move o os servos que compõem o braço para a posição desejada
 void servo_write(Servo servo, int estado);      //Movimenta o servo de forma suave
+void bluetooth_enviar(String mensagem);         //Envia uma mensagem através do Bluetooth
 
 //=======================================================================================================================

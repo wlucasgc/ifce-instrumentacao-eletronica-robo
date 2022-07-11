@@ -31,7 +31,12 @@ void loop(){
             Serial.println("Comando:    " + comando);     //Imprime o comando recebido
                 
             if(comando.length() == 7) {                                     //Verifica se é um comando válido (um comando válido possui 7 caracteres)  
-                if(comando.startsWith("dir:")) {                            //Verifica se o comando inicia com "dir:" (direção do robô)
+                if(comando.startsWith("con:")) {                            //Verifica se o comando inicia com "con:" (conexão com o aplicativo)
+                    Serial.println("Conectado ao aplicativo!");             //Imprime na Serial a resposta
+                    bluetooth_enviar("OK"); 
+                }
+                
+                else if(comando.startsWith("dir:")) {                       //Verifica se o comando inicia com "dir:" (direção do robô)
                     comando.replace("dir:", "");                            //Remove a identificação do componente do comando deixando apenas o valor
                     direcao = comando.toInt();                              //Converte o valor para um número inteiro
                     Serial.println("Direção:    " + String(direcao));       //Imprime na Serial o comando interpretado 
